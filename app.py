@@ -3,6 +3,7 @@ import PyPDF2
 
 from utils.skill_extractor import extract_skills
 from utils.domain_inference import infer_career_domain
+from utils.skill_gap import recommend_skill_gap
 
 
 # ---------- PDF TEXT EXTRACTION ----------
@@ -54,7 +55,7 @@ elif option == "Upload Resume PDF":
 # ---------- PROCESS ONLY IF TEXT EXISTS ----------
 if resume_text.strip():
 
-    # Show extracted text
+    # ---------- SHOW EXTRACTED TEXT ----------
     st.subheader("Extracted Resume Text")
     st.text(resume_text[:1500])
 
@@ -72,3 +73,12 @@ if resume_text.strip():
         st.success(", ".join(skills))
     else:
         st.warning("No skills detected. Try adding more details to the resume.")
+
+    # ---------- SKILL GAP RECOMMENDATION ----------
+    recommended_skills = recommend_skill_gap(domain, skills)
+
+    st.subheader("Recommended Skills to Learn")
+    if recommended_skills:
+        st.warning(", ".join(recommended_skills))
+    else:
+        st.success("You already have most core skills for this domain!")
