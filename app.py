@@ -1,3 +1,4 @@
+from utils.skill_extractor import extract_skills
 import streamlit as st
 import PyPDF2
 
@@ -32,3 +33,13 @@ elif option == "Upload Resume PDF":
 if resume_text:
     st.subheader("Extracted Resume Text")
     st.text(resume_text[:1500])
+
+if resume_text:
+    skills = extract_skills(resume_text)
+
+    st.subheader("Detected Skills")
+    if skills:
+        st.success(", ".join(skills))
+    else:
+        st.warning("No skills detected. Try updating resume text.")
+
