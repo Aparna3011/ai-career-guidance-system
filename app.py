@@ -57,7 +57,7 @@ if resume_text.strip():
 
     # ---------- SHOW EXTRACTED TEXT ----------
     st.subheader("Extracted Resume Text")
-    st.text(resume_text[:1500])
+    st.text(resume_text[:3000])
 
     # ---------- AI CAREER DOMAIN INFERENCE ----------
     domain, confidence = infer_career_domain(resume_text)
