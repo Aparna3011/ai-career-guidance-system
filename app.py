@@ -1,4 +1,6 @@
 from utils.skill_extractor import extract_skills
+from utils.job_matcher import match_job_role
+
 import streamlit as st
 import PyPDF2
 
@@ -42,4 +44,12 @@ if resume_text:
         st.success(", ".join(skills))
     else:
         st.warning("No skills detected. Try updating resume text.")
+
+
+if resume_text:
+    role, score = match_job_role(resume_text)
+
+    st.subheader("Recommended Job Role")
+    st.info(f"{role} (Match Score: {score}%)")
+
 
